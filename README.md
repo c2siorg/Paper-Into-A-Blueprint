@@ -4,13 +4,13 @@
 K. Soska, Nicolas Christin<br>
 2014, USENIX Security Symposium<br>
 
-
 ### Paper Summary
 
 - Introduced a novel classification system which predicts whether a currently benign website will become compromised within a year. (using textual and structural analysis of a web page)
 - The system is able to detect new attack trends relatively quickly. (the set of features it relies on is automatically extracted from the data it acquires)
 - The implemented classifier was able to achieve a 66% True Positive rate, a 17% False Positive rate.
 
+<br>
 
 ### Methodology
 
@@ -48,6 +48,7 @@ x ∊ w : the tag x is present in the tag dictionary associated with website w<b
   - **Windowing**: the dictionary of tags only contains entries from the last K sites. (For a new tag to be considered a top tag, it needs to be observed a large number of times. So there can be a significant delay between when a tag becomes useful for classification and when it will be selected as a top feature)
   - **Weighting scheme**: Features are weighted differently depending on when they are observed. Gives higher weight to more recent examples.
 
+<br>
 
 ### Features 
 
@@ -70,6 +71,7 @@ Example:
 - div{'id': 'content disclaimer'}
 - If comments are open, but there are no comments
 
+<br>
 
 ### Limitations 
 
@@ -78,6 +80,7 @@ Example:
 - In the dynamic feature extraction system, tags often rise to the top of the list because they are part of some page template which has come up frequently. There may be multiple tags associated with a particular page template which all rise at the same time, and so a few of the top tags are redundant since they identify the same thing.
 - It will take longer to train the classifiers and run the system for system configurations which use past features in addition to the current top features. (The size of the feature set is monotonically increasing)
 
+***
 <br><br>
 
 # Paper 2
@@ -93,9 +96,13 @@ Y. Liu, Armin Sarabi, +4 authors M. Liu<br>
 - Implemented a Random Forest (RF) classifier able to achieve a 90% True Positive rate, a 10% False Positive rate, and 90% accuracy.
 - Tested the prediction outcome for the top 5 data breaches in 2014 and correctly labeled 4 incidents.
 
+<br>
+
 ### Methodology
 
 <img src="Blueprints/Cloudy with a Chance of Breach Forecasting Cyber Security Incidents.png">
+
+<br>
 
 ### Features 
 
@@ -133,6 +140,8 @@ Statistics summarizing dynamic behavioral patterns extracted from the time serie
   - Recent-60 features (36) - Collected over a period of 60 days (typically leading up to the time of incident) 
   - Recent-14 features (36) - Collected over a period of 14 days (leading up to the time of incident).<br>
 
+<br>
+
 ### Strengths 
 - The trained random forest classifier achieved 90% true positive rate and 10% false positive rate. 
 - The prediction results substantially outperform what has been shown in the literature to date [1]
@@ -145,6 +154,7 @@ Statistics summarizing dynamic behavioral patterns extracted from the time serie
   - Non-victim organizations might be selected from unreported victims
 	These factors will affect the accuracy of the classifier 
 
+***
 <br><br>
 
 # Paper 3
@@ -163,6 +173,8 @@ Marie Vasek, T. Moore<br>
 - Discovered that servers running outdated versions of WordPress are less likely to be hacked than those running more recent versions.
 - Observed that running on a shared host is a positive risk factor for being hacked to serve phishing pages. However, it is a negative risk factor for being hacked for search-redirection attacks. 
 
+<br>
+
 ### Methodology
 
 <img src="Blueprints/Identifying Risk Factors for Web Server Compromise.png">
@@ -178,6 +190,8 @@ Compare the odds of a subject in the case population exhibiting a risk factor to
 - \> 1 : Those in the case group are more likely to exhibit the risk factor (positive risk factors)
 - < 1 : Those in the case group are less likely to exhibit the risk factor (negative risk factors)
 
+<br>
+
 ### Features 
 
 #### Explanatory Variables for Logistic Regression
@@ -191,12 +205,15 @@ Compare the odds of a subject in the case population exhibiting a risk factor to
 |Server Attributes |Country |Country of origin |✔ |
 | |Server Type |The type of server software (Apache, Microsoft IIS, Nginx, Google, and Yahoo) |✔ |
 
+<br>
+
 ### Limitations
 
 - There is a delay between the time of reported compromise and the identification of risk factors. It is possible that some of the web servers may have changed their configurations before all indicators could be gathered.
 - The study considers only .com domains  
 - The findings of the study are not complemented by other forms of experimentation that directly isolate explanatory factors.
 
+***
 <br><br>
 
 # Paper 4
@@ -214,10 +231,13 @@ T. Moore, R. Clayton<br>
 - Observed that phishing websites placed onto a public blacklist are re-compromised no more frequently than websites only known within closed communities.
 - Discussed strategies for mitigating 'evil search' attacks
 
+<br>
+
 ### Methodology
 
 <img src="Blueprints/Evil Searching Compromise and Re-compromise of Internet Hosts for Phishing.png">
 
+***
 <br><br>
 
 # Paper 5
@@ -233,6 +253,8 @@ Nektarios Leontiadis, Nicolas Christin<br>
 - Established that Infections persist longest on websites with high PageRank and from .edu domains    
 - Found that 96% of infected domains are connected through traffic redirection chain   
 - Estimated a conversion rate of 0.3% - 3% for drug searches turning into sales
+
+<br>
 
 ### Methodology
 
@@ -254,6 +276,7 @@ r<sub>qd</sub> : domain's position is search results<br>
 
 The survival function S(t) measures the probability that the infection’s lifetime is greater than time t. (standard Kaplan-Meier estimator)
 
+***
 <br><br>
 
 # Paper 6
@@ -270,15 +293,20 @@ Nektarios Leontiadis, T. Moore, Nicolas Christin<br>
 - Found that a small number of traffic brokers funnel traffic from compromised websites to destinations (illicit pharmacies) and they are concentrated over a few autonomous systems.
 - Observed that miscreants have readily adopted to the efforts of search engines and browsers to demote low quality content and protect the privacy of search queries 
 
+<br>
+
 ### Methodology
 
 <img src="Blueprints/A Nearly Four-Year Longitudinal Study of Search-Engine Poisoning.png">
+
+<br>
 
 ### Limitations: 
 
 - The study only looked at Google search results 
 - The study considered search results based on their presence or not in the results. However, their position in the results is more important
 
+***
 <br><br>
 
 # Paper 7
@@ -289,12 +317,14 @@ Sumayah Alrwais, Kan Yuan, Eihal Alowaisheq, Xiaojing Liao, Alina Oprea, XiaoFen
 
 ### Paper Summary
 
-- Discovered and analyzed new instances of an attack type called "watering hole"
+- Discovered and analyzed new instances of an attack type called "watering hole".
 - In a watering hole attack the adversary carefully chooses the target frequently visited by an organization or a group of individuals to compromise, for the purpose of gaining a step closer to the organization or collecting information from the group.
 - Discovered and confirmed 17 watering holes and 6 attack campaigns never reported before.
 - Gained deeper understanding of these attacks, such as repeated compromises of political websites, their long lifetimes, unique evasion strategy and new exploit techniques.
-- Discovered a recent JSONP attack on an NGO website (The attack was forced to stop as a result of their reporting)
-- Introduced a methodology to find watering hole instances by analyzing the headers of HTTP requests of target websites to identify suspicious changes. This approach is based on the idea that visiting a website multiple times in a short period of time rarely results in different HTTP requests
+- Discovered a recent JSONP attack on an NGO website. (The attack was forced to stop as a result of their reporting)
+- Introduced a methodology to find watering hole instances by analyzing the headers of HTTP requests of target websites to identify suspicious changes. This approach is based on the idea that visiting a website multiple times in a short period of time rarely results in different HTTP requests.
+
+<br>
 
 ### Methodology
 
@@ -313,6 +343,8 @@ Sumayah Alrwais, Kan Yuan, Eihal Alowaisheq, Xiaojing Liao, Alina Oprea, XiaoFen
 - Pn represents the expected distribution for visit’s change rates i.e. the probabilities Pr[Rn <= k] for all integer values of k
 - Confidence intervals are built at different confidence levels 
 
+<br>
+
 ### Features: 
 
 - A profile is used to keep track of a target’s HTTP traffic history and its change rates. 
@@ -326,6 +358,7 @@ Sumayah Alrwais, Kan Yuan, Eihal Alowaisheq, Xiaojing Liao, Alina Oprea, XiaoFen
 
 <br><br>
 
+***
 # Paper 8
 
 **deSEO: Combating Search-Result Poisoning**<br>
@@ -339,11 +372,15 @@ J. John, Y. Xie, A. Krishnamurthy, and M. Abadi<br>
 - Developed a system called deSEO that automatically detects search result poisoning attacks without crawling the content of web pages (Studying just the structure of URLs)
 - deSEO detects groups of malicious URLs, where each group correspond to an SEO campaign
 
+<br>
+
 ### Methodology
 
 <img src="Blueprints/deSEO Combating Search-Result Poisoning.png">
 
 When aggregating URL features by domain name, sub-domains were considered separately because it is possible for a subdomain to get compromised rather than the entire domain.
+
+<br>
 
 ### Features: 
  
@@ -360,9 +397,18 @@ Lexical features of URLs:
 	- Length of keywords.
 5. **Bag of words**: Keywords.
 
+<br><br>
 
+# References 
 
+[10] “Eliminating noisy information in Web pages for data mining | Proceedings of the ninth ACM SIGKDD international conference on Knowledge discovery and data mining,” Acm.org, 2022. https://dl.acm.org/doi/abs/10.1145/956750.956785 (accessed Jan. 21, 2022). <br>
 
+[11] Y. Liu et al., “Cloudy with a Chance of Breach: Forecasting Cyber Security Incidents Open access to the Proceedings of the 24th USENIX Security Symposium is sponsored by USENIX Cloudy with a Chance of Breach: Forecasting Cyber Security Incidents,” 2015. [Online]. Available: https://www.usenix.org/system/files/conference/usenixsecurity15/sec15-paper-liu.pdf. <br>
 
+[12] “Market share trends for content management systems” W3techs.com. https://w3techs.com/technologies/history_overview/content_management/ (accessed Jan. 25, 2022). <br>
 
+[13] “THE DOMAIN NAME INDUSTRY BRIEF.” Accessed: Jan. 25, 2022. [Online]. Available: https://www.verisign.com/assets/domain-name-brief-april2013.pdf?inc=www.verisigninc.com. <br>
 
+[14] N. Nikiforakis, Luca Invernizzi, Alexandros Kapravelos, and G. Vigna, “You Are What You Include: Large-scale Evaluation of Remote JavaScript Inclusions,” ResearchGate, Oct. 16, 2012. https://www.researchgate.net/publication/230881353_You_Are_What_You_Include_Large-scale_Evaluation_of_Remote_JavaScript_Inclusions (accessed Jan. 25, 2022). <br>
+
+[15] APWG, “Global phishing survey: Trends and domain name use in 2H2012,” 2013, http://docs.apwg.org/reports/APWG_GlobalPhishingSurvey_2H2012.pdf. (accessed Jan. 25, 2022) <br>
